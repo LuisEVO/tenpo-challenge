@@ -20,6 +20,7 @@ Este es un proyecto de prueba para el desafío de Tenpo.
 `npm install`
 
 ## Ejecutar el proyecto
+
 **Nota:** La versión de Node.js debe ser 20.19+
 
 `npm run dev`
