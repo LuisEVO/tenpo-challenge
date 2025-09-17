@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { HomePage } from './home/pages/HomePage';
+import { HomePage } from './pages/HomePage';
 
-export const PrivateRouter = () => {
+export const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/home" element={<HomePage />} />

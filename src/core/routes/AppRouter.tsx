@@ -1,13 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { PrivateRouter } from '@/modules/private/PrivateRouter';
-import { PublicRouter } from '@/modules/public/PublicRouter';
+import { AdminRoutes } from '@/modules/admin/AdminRoutes';
+import { AuthRoutes } from '@/modules/auth/AuthRoutes';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/private/*" element={<PrivateRouter />} />
-        <Route path="/*" element={<PublicRouter />} />
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route path="/auth/*" element={<AuthRoutes />} />
+        <Route path="*" element={<Navigate to="/auth/login" />} />
       </Routes>
     </BrowserRouter>
   );
