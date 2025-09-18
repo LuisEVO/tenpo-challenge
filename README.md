@@ -9,7 +9,6 @@ Este es un proyecto de prueba para el desafío de Tenpo.
 - React
 - TypeScript
 - Vite
-- TailwindCSS
 
 ## Clonar el repositorio
 

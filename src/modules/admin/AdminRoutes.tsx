@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 
-export const AdminRoutes = () => {
+const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/home" element={<HomePage />} />
@@ -9,3 +9,5 @@ export const AdminRoutes = () => {
     </Routes>
   );
 };
+
+export default AdminRoutes;

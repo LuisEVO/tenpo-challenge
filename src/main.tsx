@@ -1,3 +1,4 @@
+import '@/core/config/zod-translation.ts';
 import { validateAndEnableMocking } from '@/mocks/index.ts';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

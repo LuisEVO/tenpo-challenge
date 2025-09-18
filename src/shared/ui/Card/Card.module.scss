@@ -1,0 +1,22 @@
+.card {
+  display: block;
+  width: 100%;
+  background-color: var(--tenpo-bg-primary);
+  border: 1px solid var(--tenpo-border-primary);
+  border-radius: 0.375rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--tenpo-border-primary);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+}

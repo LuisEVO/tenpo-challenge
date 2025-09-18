@@ -1,0 +1,18 @@
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.formFieldLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--tenpo-text-primary);
+}
+
+.formFieldError {
+  font-size: 0.875rem;
+  color: var(--tenpo-text-error);
+  height: 0.875rem;
+}

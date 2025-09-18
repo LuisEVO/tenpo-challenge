@@ -1,0 +1,40 @@
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--tenpo-text-primary);
+  background-color: var(--tenpo-bg-primary);
+  border: 1px solid var(--tenpo-border-primary);
+  border-radius: 0.375rem;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  outline: none;
+
+  /* States */
+  &:focus {
+    color: var(--tenpo-text-primary);
+    background-color: var(--tenpo-bg-primary);
+    border-color: var(--tenpo-primary-light);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem var(--tenpo-shadow-primary);
+  }
+
+  &::placeholder {
+    color: var(--tenpo-text-secondary);
+    opacity: 1;
+  }
+
+  /* State variants */
+  &-error {
+    border-color: var(--tenpo-danger);
+  }
+
+  &-error:focus {
+    border-color: var(--tenpo-danger);
+    box-shadow: 0 0 0 0.25rem var(--tenpo-shadow-danger);
+  }
+}

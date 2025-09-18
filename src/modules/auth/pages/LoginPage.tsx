@@ -1,54 +1,43 @@
+import { tokenService } from '@/core/services/token-service';
+import { Button } from '@/shared/ui/Button';
+import { Card } from '@/shared/ui/Card';
+import { Input } from '@/shared/ui/Input';
+import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import type { LoginDto } from '../interfaces/login-dto';
+import { authService } from '../services/auth-service';
+import styles from './LoginPage.module.scss';
+import { FormField } from '../../../shared/ui/FormField';
 
-// Zod schema for validation
 const loginSchema = z.object({
-  email: z.email('Ingrese un correo válido'),
-  password: z.string('Ingrese una contraseña'),
+  email: z.email('Ingrese su correo electrónico y asegúrese de que sea válido'),
+  password: z.string().nonempty('Ingrese su contraseña'),
 });
-
-// Type inference from Zod schema
-type LoginFormData = z.infer<typeof loginSchema>;
 
 export const LoginPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
-    reset,
-  } = useForm<LoginFormData>({
+    formState: { errors },
+  } = useForm<LoginDto>({
     resolver: zodResolver(loginSchema),
-    mode: 'onChange',
   });
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (data: LoginDto) => {
     setLoading(true);
     setMessage('');
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const responseData = await response.json();
-
-      if (response.ok) {
-        setMessage(`Login successful! Token: ${responseData.token}`);
-        // Store token in localStorage for future use
-        localStorage.setItem('token', responseData.token);
-        reset(); // Clear form after successful login
-      } else {
-        setMessage(`Error: ${responseData.message}`);
-      }
+      const response = await authService.login(data);
+      tokenService.setToken(response.token);
+      navigate('/admin');
     } catch (error) {
       setMessage(
         `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
@@ -59,30 +48,37 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" {...register('email')} />
-          {errors.email && (
-            <div style={{ color: 'red' }}>{errors.email.message}</div>
-          )}
-        </div>
+    <div className={styles.page}>
+      <Card className={styles.page__card}>
+        <Card.Header>
+          <h1>Login</h1>
+        </Card.Header>
+        <Card.Content>
+          <form
+            className={styles.page__form}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
+            <FormField>
+              <FormField.Label htmlFor="email">Email:</FormField.Label>
+              <Input type="email" id="email" {...register('email')} />
+              <FormField.Error error={errors.email?.message} />
+            </FormField>
 
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" {...register('password')} />
-          {errors.password && (
-            <div style={{ color: 'red' }}>{errors.password.message}</div>
-          )}
-        </div>
+            <FormField>
+              <FormField.Label htmlFor="password">Password:</FormField.Label>
+              <Input type="password" id="password" {...register('password')} />
+              <FormField.Error error={errors.password?.message} />
+            </FormField>
 
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-      {message && <div>{message}</div>}
+            <Button type="submit" disabled={loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </Button>
+          </form>
+        </Card.Content>
+
+        {message && <div>{message}</div>}
+      </Card>
     </div>
   );
 };

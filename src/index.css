@@ -1,1 +1,82 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  /* Tenpo Brand Colors - Based on tenpo.cl */
+  --tenpo-primary: #00D4AA;
+  --tenpo-primary-light: #33DDBA;
+  --tenpo-primary-dark: #00B894;
+  --tenpo-primary-darker: #00A085;
+
+  --tenpo-secondary: #6B7280;
+  --tenpo-secondary-light: #9CA3AF;
+  --tenpo-secondary-dark: #4B5563;
+
+  --tenpo-accent: #3B82F6;
+  --tenpo-accent-light: #60A5FA;
+  --tenpo-accent-dark: #2563EB;
+
+  --tenpo-danger: #EF4444;
+  --tenpo-danger-light: #F87171;
+  --tenpo-danger-dark: #DC2626;
+
+  --tenpo-success: #10B981;
+  --tenpo-success-light: #34D399;
+  --tenpo-success-dark: #059669;
+
+  --tenpo-warning: #F59E0B;
+  --tenpo-warning-light: #FBBF24;
+  --tenpo-warning-dark: #D97706;
+
+  --tenpo-info: #06B6D4;
+  --tenpo-info-light: #22D3EE;
+  --tenpo-info-dark: #0891B2;
+
+  /* Neutral Colors */
+  --tenpo-light: #F8FAFC;
+  --tenpo-dark: #1E293B;
+  --tenpo-darker: #0F172A;
+
+  --tenpo-white: #FFFFFF;
+  --tenpo-black: #000000;
+
+  /* Text Colors */
+  --tenpo-text-primary: #1E293B;
+  --tenpo-text-secondary: #64748B;
+  --tenpo-text-muted: #94A3B8;
+  --tenpo-text-light: #FFFFFF;
+  --tenpo-text-dark: #0F172A;
+  --tenpo-text-error: #EF4444;
+
+  /* Background Colors */
+  --tenpo-bg-primary: #FFFFFF;
+  --tenpo-bg-secondary: #F8FAFC;
+  --tenpo-bg-tertiary: #F1F5F9;
+  --tenpo-bg-disabled: #E2E8F0;
+  --tenpo-bg-dark: #1E293B;
+
+  /* Border Colors */
+  --tenpo-border-primary: #E2E8F0;
+  --tenpo-border-light: #F1F5F9;
+  --tenpo-border-dark: #CBD5E1;
+  --tenpo-border-accent: #00D4AA;
+
+  /* Shadow Colors */
+  --tenpo-shadow-primary: rgba(0, 212, 170, 0.25);
+  --tenpo-shadow-success: rgba(16, 185, 129, 0.25);
+  --tenpo-shadow-danger: rgba(239, 68, 68, 0.25);
+  --tenpo-shadow-warning: rgba(245, 158, 11, 0.25);
+  --tenpo-shadow-info: rgba(6, 182, 212, 0.25);
+  --tenpo-shadow-neutral: rgba(0, 0, 0, 0.1);
+
+  /* Gradient Colors */
+  --tenpo-gradient-primary: linear-gradient(135deg, #00D4AA 0%, #00B894 100%);
+  --tenpo-gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  --tenpo-gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
