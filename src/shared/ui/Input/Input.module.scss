@@ -29,11 +29,11 @@
   }
 
   /* State variants */
-  &-error {
+  &--error {
     border-color: var(--tenpo-danger);
   }
 
-  &-error:focus {
+  &--error:focus {
     border-color: var(--tenpo-danger);
     box-shadow: 0 0 0 0.25rem var(--tenpo-shadow-danger);
   }

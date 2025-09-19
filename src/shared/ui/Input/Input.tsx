@@ -11,13 +11,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className = '', state = 'default', ...props }, ref) => {
-    const classNames = clsx(
-      styles.input,
-      {
-        [styles.inputError]: state === 'error',
-      },
-      className
-    );
+    const classNames = clsx(styles.input, styles[`input--${state}`], className);
 
     return <input ref={ref} className={classNames} {...props} />;
   }

@@ -61,13 +61,23 @@ export const LoginPage: React.FC = () => {
           >
             <FormField>
               <FormField.Label htmlFor="email">Email:</FormField.Label>
-              <Input type="email" id="email" {...register('email')} />
+              <Input
+                type="email"
+                id="email"
+                {...register('email')}
+                state={errors.email ? 'error' : 'default'}
+              />
               <FormField.Error error={errors.email?.message} />
             </FormField>
 
             <FormField>
               <FormField.Label htmlFor="password">Password:</FormField.Label>
-              <Input type="password" id="password" {...register('password')} />
+              <Input
+                type="password"
+                id="password"
+                {...register('password')}
+                state={errors.password ? 'error' : 'default'}
+              />
               <FormField.Error error={errors.password?.message} />
             </FormField>
 

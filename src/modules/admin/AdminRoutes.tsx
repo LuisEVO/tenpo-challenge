@@ -4,8 +4,8 @@ import { HomePage } from './pages/HomePage';
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/home" element={<HomePage />} />
-      <Route path="*" element={<Navigate to="../home" />} />
+      <Route path="home" element={<HomePage />} />
+      <Route path="*" element={<Navigate to="../home" replace />} />
     </Routes>
   );
 };
