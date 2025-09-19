@@ -1,9 +1,9 @@
-import { tokenService } from '../services/token-service';
-import { CanActivateGuard } from './canActivateGuard';
+import { useAuthContext } from '../auth/contexts/AuthContext';
+import { CanActivateGuard } from './CanActivateGuard';
 
 export const AuthenticatedRouteGuard = () => {
-  const isTokenValid = tokenService.isTokenValid();
+  const { isAuthenticated } = useAuthContext();
   return (
-    <CanActivateGuard canActivate={isTokenValid} redirectTo="/auth/login" />
+    <CanActivateGuard canActivate={isAuthenticated} redirectTo="/auth/login" />
   );
 };

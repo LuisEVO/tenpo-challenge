@@ -1,4 +1,4 @@
-import { tokenService } from '@/core/services/token-service';
+import { useAuthContext } from '@/core/auth';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
 import { Input } from '@/shared/ui/Input';
@@ -7,20 +7,29 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import { FormField } from '../../../shared/ui/FormField';
+import { getHttpErrorMessage } from '../../../shared/utils/get-http-error-message';
 import type { LoginDto } from '../interfaces/login-dto';
 import { authService } from '../services/auth-service';
 import styles from './LoginPage.module.scss';
-import { FormField } from '../../../shared/ui/FormField';
 
 const loginSchema = z.object({
   email: z.email('Ingrese su correo electrónico y asegúrese de que sea válido'),
   password: z.string().nonempty('Ingrese su contraseña'),
 });
 
+const loginErrorsMap = new Map<number, string>([
+  [
+    401,
+    'Verifique si los datos ingresados son correctos y vuelva a intentarlo',
+  ],
+]);
+
 export const LoginPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setToken } = useAuthContext();
 
   const {
     register,
@@ -36,12 +45,11 @@ export const LoginPage: React.FC = () => {
 
     try {
       const response = await authService.login(data);
-      tokenService.setToken(response.token);
+      setToken(response.token);
       navigate('/admin');
     } catch (error) {
-      setMessage(
-        `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
-      );
+      const message = getHttpErrorMessage(error, loginErrorsMap);
+      setMessage(message);
     } finally {
       setLoading(false);
     }
@@ -81,13 +89,13 @@ export const LoginPage: React.FC = () => {
               <FormField.Error error={errors.password?.message} />
             </FormField>
 
+            {message && <div className={styles.page__message}>{message}</div>}
+
             <Button type="submit" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </Card.Content>
-
-        {message && <div>{message}</div>}
       </Card>
     </div>
   );
