@@ -43,9 +43,15 @@ Abrir el navegador y acceder a [http://localhost:5173](http://localhost:5173)
 El proyecto abrirá el login por defecto en la siguiente ruta:
 - [http://localhost:5173/auth/login](http://localhost:5173/auth/login)
 
+![Login](./public/demo/login.png)
+
 Luego de loguearse, se abrirá la siguiente ruta home:
 - [http://localhost:5173/admin/home](http://localhost:5173/admin/home)
 
+![Home](./public/demo/home.png)
+
 En el home se encontrará un botón para listar artículos:
 - [http://localhost:5173/admin/articles](http://localhost:5173/admin/articles)
+
+![Articles](./public/demo/articles.png)
 
