@@ -1,0 +1,48 @@
+.loading-item {
+  padding: 0.75rem;
+
+  &__skeleton {
+    display: flex;
+    background-color: var(--tenpo-bg-primary);
+    border: 1px solid var(--tenpo-border-primary);
+    border-radius: 12px;
+    height: 180px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  &__skeleton-image {
+    width: 200px;
+    background-color: var(--tenpo-bg-tertiary);
+    flex-shrink: 0;
+  }
+
+  &__skeleton-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__skeleton-title {
+    height: 1.5rem;
+    background-color: var(--tenpo-bg-tertiary);
+    border-radius: 4px;
+    width: 80%;
+  }
+
+  &__skeleton-text {
+    height: 1rem;
+    background-color: var(--tenpo-bg-tertiary);
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  &__skeleton-tags {
+    height: 1.5rem;
+    background-color: var(--tenpo-bg-tertiary);
+    border-radius: 4px;
+    width: 60%;
+    margin-top: auto;
+  }
+}

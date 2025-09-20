@@ -1,37 +1,25 @@
 .container {
   padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
+  text-align: center;
 }
 
-.toolbar {
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--tenpo-text-primary);
+  margin-bottom: 1.5rem;
+  background: var(--tenpo-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcomeMessage {
+  font-size: 1.2rem;
+  color: var(--tenpo-text-secondary);
+  line-height: 1.6;
   display: flex;
-  justify-content: space-between;
+  gap: .5rem;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background-color: var(--tenpo-bg-primary);
-  border-radius: 8px;
-  border: 1px solid var(--tenpo-border-primary);
-  margin-bottom: 2rem;
-
-  .welcome {
-    color: var(--tenpo-text-primary);
-    font-weight: 500;
-  }
-}
-
-.content {
-  ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 2rem;
-
-    li {
-      padding: 0.75rem;
-      margin-bottom: 0.5rem;
-      background-color: var(--tenpo-bg-tertiary);
-      border-radius: 4px;
-      color: var(--tenpo-text-primary);
-    }
-  }
 }

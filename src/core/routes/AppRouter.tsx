@@ -11,7 +11,7 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/admin" element={<AuthenticatedRouteGuard />}>
-          <Route index element={<Navigate to="home" replace />} />
+          <Route index element={<Navigate to="/articles" replace />} />
           <Route path="*" element={<AdminRoutes />} />
         </Route>
         <Route path="/auth" element={<UnauthenticatedRouteGuard />}>

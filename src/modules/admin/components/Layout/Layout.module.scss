@@ -1,0 +1,21 @@
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--tenpo-bg-primary);
+  border-radius: 8px;
+  border: 1px solid var(--tenpo-border-primary);
+  margin-bottom: 2rem;
+
+  .welcome {
+    color: var(--tenpo-text-primary);
+    font-weight: 500;
+  }
+}

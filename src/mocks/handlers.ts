@@ -10,66 +10,93 @@ const mockUsers = [
   },
 ];
 
-// Generate 2000 mock users for the list
-const generateMockUsers = (): Array<{
+// Generate 2000 mock articles for the list
+const generateMockArticles = (): Array<{
   id: string;
-  name: string;
-  email: string;
-  role: string;
-  status: 'active' | 'inactive';
-  createdAt: string;
-  lastLogin: string;
+  title: string;
+  summary: string;
+  author: string;
+  publishedAt: string;
+  image: string;
+  tags: string[];
 }> => {
-  const roles = ['admin', 'user', 'moderator', 'viewer'];
-  const statuses: ('active' | 'inactive')[] = ['active', 'inactive'];
-  const firstNames = [
-    'Juan',
-    'María',
-    'Carlos',
-    'Ana',
-    'Luis',
-    'Carmen',
-    'Pedro',
-    'Laura',
-    'Diego',
-    'Sofia',
+  const authors = [
+    'María García',
+    'Carlos López',
+    'Ana Martínez',
+    'Luis Rodríguez',
+    'Carmen Sánchez',
+    'Pedro González',
+    'Laura Pérez',
+    'Diego Torres',
+    'Sofia Flores',
+    'Juan Ramírez',
   ];
-  const lastNames = [
-    'García',
-    'Rodríguez',
-    'Martínez',
-    'López',
-    'González',
-    'Pérez',
-    'Sánchez',
-    'Ramírez',
-    'Torres',
-    'Flores',
+  const tags = [
+    'innovación',
+    'tendencia',
+    'análisis',
+    'tutorial',
+    'noticia',
+    'opinión',
+    'investigación',
+    'guía',
+    'caso de estudio',
+    'entrevista',
+    'review',
+    'actualización',
+  ];
+
+  const articleTitles = [
+    'El futuro de la inteligencia artificial en el trabajo',
+    'Cómo optimizar tu productividad diaria',
+    'Tendencias en desarrollo web para 2024',
+    'La importancia de la ciberseguridad empresarial',
+    'Guía completa de React y TypeScript',
+    'Estrategias de marketing digital efectivas',
+    'El impacto del cambio climático en la economía',
+    'Tecnologías emergentes en el sector salud',
+    'Cómo construir una cultura empresarial sólida',
+    'La revolución de las criptomonedas',
+  ];
+
+  const summaries = [
+    'Un análisis profundo sobre cómo la IA está transformando el mundo laboral',
+    'Técnicas probadas para aumentar tu eficiencia personal y profesional',
+    'Las últimas tecnologías y frameworks que dominarán el desarrollo web',
+    'Mejores prácticas para proteger tu empresa de amenazas digitales',
+    'Todo lo que necesitas saber para dominar React con TypeScript',
+    'Estrategias comprobadas para hacer crecer tu negocio online',
+    'Cómo el cambio climático afecta los mercados globales',
+    'Innovaciones tecnológicas que están revolucionando la medicina',
+    'Elementos clave para crear un ambiente de trabajo positivo',
+    'El panorama actual y futuro de las monedas digitales',
   ];
 
   return Array.from({ length: 2000 }, (_, index) => {
-    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-    const role = roles[Math.floor(Math.random() * roles.length)];
-    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    const title =
+      articleTitles[Math.floor(Math.random() * articleTitles.length)];
+    const summary = summaries[Math.floor(Math.random() * summaries.length)];
+    const author = authors[Math.floor(Math.random() * authors.length)];
+    const articleTags = tags
+      .sort(() => 0.5 - Math.random())
+      .slice(0, Math.floor(Math.random() * 3) + 2);
 
     return {
       id: (index + 1).toString(),
-      name: `${firstName} ${lastName}`,
-      email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}${index + 1}@example.com`,
-      role,
-      status,
-      createdAt: new Date(
+      title: `${title} ${index + 1}`,
+      summary,
+      author,
+      publishedAt: new Date(
         Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000
       ).toISOString(),
-      lastLogin: new Date(
-        Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000
-      ).toISOString(),
+      image: `https://picsum.photos/400/250?random=${index + 1}`,
+      tags: articleTags,
     };
   });
 };
 
-const allMockUsers = generateMockUsers();
+const allMockArticles = generateMockArticles();
 
 const JWT_SECRET = 'tenpo-secret-key-for-development';
 
@@ -103,43 +130,22 @@ export const handlers = [
     });
   }),
 
-  http.get('/api/users', async ({ request }) => {
+  http.get('/api/articles', async ({ request }) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') || '1');
     const limit = parseInt(url.searchParams.get('limit') || '50');
-    const search = url.searchParams.get('search') || '';
-    const role = url.searchParams.get('role') || '';
-    const status = url.searchParams.get('status') || '';
-
-    let filteredUsers = allMockUsers;
-
-    if (search) {
-      filteredUsers = filteredUsers.filter(
-        (user) =>
-          user.name.toLowerCase().includes(search.toLowerCase()) ||
-          user.email.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    if (role) {
-      filteredUsers = filteredUsers.filter((user) => user.role === role);
-    }
-
-    if (status) {
-      filteredUsers = filteredUsers.filter((user) => user.status === status);
-    }
 
     // Calculate pagination
-    const total = filteredUsers.length;
+    const total = allMockArticles.length;
     const totalPages = Math.ceil(total / limit);
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
-    const users = filteredUsers.slice(startIndex, endIndex);
+    const articles = allMockArticles.slice(startIndex, endIndex);
 
     // Simulate network delay
     await delay(500);
     return HttpResponse.json({
-      data: users,
+      data: articles,
       pagination: {
         page,
         limit,
